@@ -3,7 +3,7 @@ package test;
 import main.StringCalculator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -30,6 +30,21 @@ public class StringCalculatorTest {
     @Test
     public void add_CustomDelimiter_ReturnsSum() {
         assertEquals(3, StringCalculator.add("//;\n1;2"));
+    }
+
+    @Test
+    public void add_SingleNegativeNumber_ThrowsException() {
+        assertThrows(IllegalArgumentException.class,()->StringCalculator.add("1,-2,3"));
+    }
+
+    @Test
+    public void add_MultipleNegativeNumbers_ThrowsExceptionWithNumbers() {
+        try {
+            StringCalculator.add("-1,-2,3");
+            fail("Expected IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            assertEquals("Negative numbers are not allowed: [-1, -2]", e.getMessage());
+        }
     }
 
 }

@@ -25,7 +25,6 @@ public class StringCalculator {
         // Split the input string using the delimiters
         String[] numberArray = numbers.split(String.join("|", delimiters));
 
-
         int sum = 0;
         for (String number : numberArray) {
             sum += Integer.parseInt(number);
